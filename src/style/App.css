@@ -11,28 +11,29 @@
 
   h1 {
     text-align: center;
-    margin: .5rem 0 .7rem;
+    margin: 0.5rem 0 0.7rem;
   }
 
   h2 {
     text-align: center;
-    margin: .5rem 0 1rem;
+    margin: 0.5rem 0 1rem;
   }
 }
 
-.PantryLeft, .RecipesComponent {
+.PantryLeft,
+.RecipesComponent {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .addButton {
     align-self: flex-start;
-    margin: 0 .5rem 1rem 0;
+    margin: 0 0.5rem 0.5rem 0;
   }
 
   .backButton {
     align-self: flex-end;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 
   .actionsContainer {

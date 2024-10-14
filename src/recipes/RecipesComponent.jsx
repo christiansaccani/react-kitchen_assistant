@@ -8,7 +8,7 @@ import "../style/App.css";
 import RecipesModal from "./RecipesModal";
 import SearchIcon from "@mui/icons-material/Search";
 import RemoveIcon from "@mui/icons-material/RemoveCircleOutline";
-import PlayIcon from '@mui/icons-material/PlayCircleOutline';
+import PlayIcon from "@mui/icons-material/PlayCircleOutline";
 
 function RecipesComponent({
   pantryData,
@@ -33,30 +33,35 @@ function RecipesComponent({
         return (
           <div className="actionsContainer">
             <Button
-                onClick={() => {
-                    const recipeToUse = params.data;
-                    const confirmUse = window.confirm(
-                        `Are you sure to use the recipe "${recipeToUse.name}"?`
-                    );
+              onClick={() => {
+                const recipeToUse = params.data;
+                const confirmUse = window.confirm(
+                  `Are you sure to use the recipe "${recipeToUse.name}"?`
+                );
 
-                    if (confirmUse) {
-                        setPantryData(prevPantryData => {
-                            return prevPantryData.map(item => {
-                            const usedIngredient = recipeToUse.ingredients.find(ingredient => ingredient.name === item.name);
-                                if (usedIngredient) {
-                                    return {
-                                    ...item,
-                                    quantity: item.quantity - usedIngredient.quantity > 0 ? item.quantity - usedIngredient.quantity : 0,
-                                    };
-                                }
-                            return item;
-                            });
-                        });
-                    }
-                }}
-                color="success"
+                if (confirmUse) {
+                  setPantryData((prevPantryData) => {
+                    return prevPantryData.map((item) => {
+                      const usedIngredient = recipeToUse.ingredients.find(
+                        (ingredient) => ingredient.name === item.name
+                      );
+                      if (usedIngredient) {
+                        return {
+                          ...item,
+                          quantity:
+                            item.quantity - usedIngredient.quantity > 0
+                              ? item.quantity - usedIngredient.quantity
+                              : 0,
+                        };
+                      }
+                      return item;
+                    });
+                  });
+                }
+              }}
+              color="success"
             >
-                <PlayIcon />
+              <PlayIcon />
             </Button>
 
             <Button
@@ -97,7 +102,6 @@ function RecipesComponent({
     setOpenModal(false);
     setSelectedRecipe(null);
   };
-
 
   return (
     <div className="RecipesComponent">
