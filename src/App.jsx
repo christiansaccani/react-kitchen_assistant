@@ -9,7 +9,9 @@ import PantryLeft from "./components/PantryLeft";
 import ConsumingComponent from "./components/ConsumingComponent";
 import AddingComponent from "./components/AddingComponent";
 import RecipesComponent from "./recipes/RecipesComponent";
+import RecipesViewlist from "./recipes/RecipesViewlist";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ViewListIcon from '@mui/icons-material/ViewList';
 
 function App() {
   const [shoppingListData, setShoppingListData] = useState([]);
@@ -113,6 +115,9 @@ function App() {
                     marginTop: ".5rem",
                   }}
                 >
+                  <Button variant="contained" component={Link} to="/view-list" style={{ marginRight: ".5rem" }}>
+                    <ViewListIcon style={{ marginRight: ".5rem" }} /> View List
+                  </Button>
                   <Button variant="contained" component={Link} to="/recipes">
                     <FavoriteIcon style={{ marginRight: ".5rem" }} /> Recipes
                   </Button>
@@ -137,6 +142,16 @@ function App() {
                 setPantryData={setPantryData}
                 recipesData={recipesData}
                 setRecipesData={setRecipesData}
+              />
+            }
+          />
+          <Route
+            path="/view-list"
+            element={
+              <RecipesViewlist
+                pantryData={pantryData}
+                setPantryData={setPantryData}
+                recipesData={recipesData}
               />
             }
           />
