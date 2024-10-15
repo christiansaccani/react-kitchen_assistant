@@ -60,7 +60,7 @@ function RecipesComponent({
                 }
               }}
               color="success"
-              aria-hidden='false'
+              aria-hidden="false"
             >
               <PlayIcon />
             </Button>

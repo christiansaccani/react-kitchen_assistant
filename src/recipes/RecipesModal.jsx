@@ -62,6 +62,16 @@ function RecipesModal({
   );
 
   const handleSaveRecipe = useCallback(() => {
+    if (!selectedName) {
+      alert("Must choose a name for the Recipe.");
+      return;
+    }
+
+    if (selectedIngredients.length <= 0) {
+      alert("Choose at least one Ingredient.");
+      return;
+    }
+
     const newRecipe = {
       id: idCounter.current,
       name: selectedName,
@@ -190,7 +200,11 @@ function RecipesModal({
           margin: "0 1rem 1rem",
         }}
       >
-        <Button onClick={handleSaveRecipe} variant="contained">
+        <Button
+          onClick={handleSaveRecipe}
+          variant="contained"
+          disabled={!selectedName}
+        >
           Save Recipe
         </Button>
         <Button onClick={onClose}>Close</Button>

@@ -11,7 +11,7 @@ import AddingComponent from "./components/AddingComponent";
 import RecipesComponent from "./recipes/RecipesComponent";
 import RecipesViewlist from "./recipes/RecipesViewlist";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewListIcon from "@mui/icons-material/ViewList";
 
 function App() {
   const [shoppingListData, setShoppingListData] = useState([]);
@@ -36,8 +36,8 @@ function App() {
 
   const shoppingListColDefs = [
     { headerName: "Item Name", field: "name", flex: 1 },
-    { headerName: "To Buy (g)", field: "toBuy", flex: 1 },
-    { headerName: "Quantity (g)", field: "quantity", flex: 1 },
+    { headerName: "Quantity to Buy", field: "toBuy", flex: 1 },
+    { headerName: "In Storage", field: "quantity", flex: 1 },
   ];
 
   const getRowStyle = (params) => {
@@ -77,24 +77,21 @@ function App() {
                   to="/pantry"
                   style={{ marginBottom: ".5rem", marginRight: ".5rem" }}
                 >
-                  {" "}
-                  Pantry{" "}
+                  Pantry
                 </Button>
                 <Button
                   variant="contained"
                   onClick={handleOpenAddingComponent}
                   style={{ marginBottom: ".5rem", marginRight: ".5rem" }}
                 >
-                  {" "}
-                  Adding{" "}
+                  Adding
                 </Button>
                 <Button
                   variant="contained"
                   onClick={handleOpenConsumingComponent}
                   style={{ marginBottom: ".5rem", marginRight: ".5rem" }}
                 >
-                  {" "}
-                  Consuming{" "}
+                  Consuming
                 </Button>
 
                 <div
@@ -115,7 +112,12 @@ function App() {
                     marginTop: ".5rem",
                   }}
                 >
-                  <Button variant="contained" component={Link} to="/view-list" style={{ marginRight: ".5rem" }}>
+                  <Button
+                    variant="contained"
+                    component={Link}
+                    to="/view-list"
+                    style={{ marginRight: ".5rem" }}
+                  >
                     <ViewListIcon style={{ marginRight: ".5rem" }} /> View List
                   </Button>
                   <Button variant="contained" component={Link} to="/recipes">

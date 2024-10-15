@@ -18,3 +18,6 @@ Apre un modale in cui creare una nuova ricetta inserendo il nome e gli ingredien
 
 ### view (recipes)
 Apre un modale che mostra le ricette attuabili con le disponibilità presenti nel pantry.
+
+#### ** note well **
+I dati per ora vanno gestiti da codice, bisogna inserire un minidatabase che ne permetta la persistenza per poterla utilizzare completamente e liberamente da App.
