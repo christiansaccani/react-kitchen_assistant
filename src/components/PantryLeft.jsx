@@ -5,6 +5,8 @@ import { Button, TextField, InputLabel } from "@mui/material";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import "../style/App.css";
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import DrawIcon from '@mui/icons-material/Draw';
 import SettingsIcon from "@mui/icons-material/Settings";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
@@ -143,7 +145,11 @@ function PantryLeft({ pantryData, setPantryData }) {
         <InputLabel shrink>Item Name</InputLabel>
         <TextField
           value={selectedName}
-          onChange={(e) => setSelectedName(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            const formattedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+            setSelectedName(formattedValue);
+          }}
           fullWidth
           variant="outlined"
           style={{ marginBottom: "1rem" }}
@@ -170,6 +176,7 @@ function PantryLeft({ pantryData, setPantryData }) {
         />
 
         <Button type="submit" variant="contained" className="addButton">
+          {selectedObject ? <DrawIcon style={{marginRight: '.2rem'}}/> : <LibraryAddIcon style={{marginRight: '.2rem'}}/>}
           {selectedObject ? "Edit" : "Add"}
         </Button>
       </form>

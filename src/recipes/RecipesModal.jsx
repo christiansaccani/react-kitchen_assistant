@@ -12,15 +12,17 @@ import {
   Chip,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useRecipes } from '../context/RecipesContext';
 
 function RecipesModal({
   open,
   onClose,
   selectedRecipe,
   pantryData,
-  recipesData,
-  setRecipesData,
 }) {
+  const { recipesData, setRecipesData } = useRecipes();
   const idCounter = useRef(0);
   const [selectedName, setSelectedName] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -159,7 +161,7 @@ function RecipesModal({
           disabled={!selectedItem || !selectedAmount || selectedAmount <= 0}
           style={{ marginBottom: "1rem" }}
         >
-          Add Ingredient
+          <LibraryAddIcon style={{marginRight: '.2rem'}}/>Add Ingredient
         </Button>
 
         <ul
@@ -205,7 +207,7 @@ function RecipesModal({
           variant="contained"
           disabled={!selectedName}
         >
-          Save Recipe
+          <FavoriteBorderIcon style={{marginRight: '.2rem'}}/>Save Recipe
         </Button>
         <Button onClick={onClose}>Close</Button>
       </DialogActions>
