@@ -43,6 +43,8 @@ function App() {
     { headerName: "In Storage", field: "quantity", flex: 1 },
   ];
 
+  /* gestisce i colori della lista,
+  rosso quando inferiore al minimo, nero quando uguale a 0 */
   const getRowStyle = (params) => {
     if (params.data.quantity < params.data.minimum) {
       if (params.data.quantity == 0) {
@@ -53,6 +55,9 @@ function App() {
     return null;
   };
 
+  /* aggiorna la lista ad ogni cambiamento della Pantry,
+  mostrando gli elementi con quantità
+  inferiore al doppio della quantità minima*/
   useEffect(() => {
     const filteredPantry = pantryData
       .filter((item) => item.quantity < item.minimum * 2)

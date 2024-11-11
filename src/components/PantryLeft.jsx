@@ -123,6 +123,7 @@ function PantryLeft({ pantryData, setPantryData }) {
     [pantryData]
   );
 
+  /* reset dei dati ad ogni cambiamento della Pantry */
   useEffect(() => {
     setSelectedName("");
     setSelectedQuantity("");

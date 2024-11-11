@@ -205,7 +205,7 @@ function RecipesModal({
         <Button
           onClick={handleSaveRecipe}
           variant="contained"
-          disabled={!selectedName}
+          disabled={!selectedName || selectedIngredients.length <= 0}
         >
           <FavoriteBorderIcon style={{marginRight: '.2rem'}}/>Save Recipe
         </Button>

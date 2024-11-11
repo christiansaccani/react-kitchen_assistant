@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import {
@@ -85,21 +85,24 @@ function RecipesComponent({ pantryData, setPantryData }) {
     },
   ];
 
+  // Gestione della chiusura del modale delle ricette
   const handleCloseModal = () => {
     setOpenModal(false);
     setSelectedRecipe(null);
   };
 
+  // Gestione della chiusura del dialog delle porzioni
   const handleClosePortionDialog = () => {
     setOpenPortionDialog(false);
     setInsufficientIngredients(false);
     setSelectedRecipe(null);
   };
 
-  const handleUseRecipe = () => {
+  // Funzione per usare la ricetta, controllando la disponibilità degli ingredienti
+  const handleUseRecipe = useCallback(() => {
     if (!selectedRecipe) return;
 
-    // Check for insufficient ingredients based on current portion count
+    // Verifica ingredienti insufficienti in base al numero di porzioni
     const insufficient = selectedRecipe.ingredients.some((ingredient) => {
       const pantryItem = pantryData.find(
         (item) => item.name === ingredient.name
@@ -109,12 +112,13 @@ function RecipesComponent({ pantryData, setPantryData }) {
       );
     });
 
+    // Se mancano ingredienti sufficienti, esce dal ciclo e visualizza un messaggio di errore
     if (insufficient) {
       setInsufficientIngredients(true);
       return;
     }
 
-    // If we have sufficient ingredients, update the pantry
+    // Aggiorna il pantry se gli ingredienti sono sufficienti
     setPantryData((prevPantryData) => {
       return prevPantryData.map((item) => {
         const usedIngredient = selectedRecipe.ingredients.find(
@@ -132,7 +136,12 @@ function RecipesComponent({ pantryData, setPantryData }) {
     });
 
     handleClosePortionDialog();
-  };
+  }, [pantryData]);
+
+  // reset della select al cambio dei dati
+  useEffect(() => {
+    setSelectedRecipe(null)
+  }, [pantryData, recipesData])
 
   return (
     <div className="RecipesComponent">
@@ -140,7 +149,7 @@ function RecipesComponent({ pantryData, setPantryData }) {
 
       <Button
         onClick={() => {
-          setSelectedRecipe(null); // Ensure we're creating a new recipe
+          setSelectedRecipe(null); // Assicura che si stia creando una nuova ricetta
           setOpenModal(true);
         }}
         variant="contained"
@@ -161,6 +170,7 @@ function RecipesComponent({ pantryData, setPantryData }) {
         Back
       </Button>
 
+      {/* Modale delle ricette */}
       <RecipesModal
         open={openModal}
         onClose={handleCloseModal}
@@ -168,6 +178,7 @@ function RecipesComponent({ pantryData, setPantryData }) {
         pantryData={pantryData}
       />
 
+      {/* Dialog delle porzioni */}
       <Dialog
         open={openPortionDialog}
         onClose={handleClosePortionDialog}
@@ -185,7 +196,7 @@ function RecipesComponent({ pantryData, setPantryData }) {
             onChange={(e) => {
               const value = Math.max(1, Number(e.target.value));
               setPortionCount(value);
-              setInsufficientIngredients(false); // Reset error when portions change
+              setInsufficientIngredients(false); // Resetta l'errore quando le porzioni cambiano
             }}
             inputProps={{ min: 1 }}
             fullWidth
